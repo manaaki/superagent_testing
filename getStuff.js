@@ -1,16 +1,9 @@
 var request = require('superagent');
 
-function getStuff(path, doSomething){
-  request
-    .get(path)
-    .end(function(err, res) {
-      console.log(res);
-        if(err) {
-          doSomething(err);
-        } else
-          doSomething(null, res);
-      }
-  );
-}
+var getStuff = function(path, callback) {
+  request('http://www.stuff.co.nz', function(err, res) {
+    callback(null, res.text);
+  });
+};
 
 module.exports = getStuff;
